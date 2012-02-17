@@ -9,12 +9,14 @@ public class GameView extends View {
 	public int contatore = 0;
 	public Griglia griglia;
 	public Numbers numbers;
+	public Numbers numbers2;
 
 	public GameView(Context context)
 	{
 		super(context);
 		griglia=new Griglia(context);
-		numbers = new Numbers(context);
+		numbers = new Numbers(context,true);
+		numbers2 = new Numbers(context,false);
 	}
 
 	protected void onDraw(Canvas canvas)
@@ -27,12 +29,18 @@ public class GameView extends View {
 			}
 		canvas.drawBitmap(numbers.getNumbers()[0], null,numbers.getBound()[0],null);
 		canvas.drawBitmap(numbers.getNumbers()[1], null,numbers.getBound()[1],null);
+		canvas.drawBitmap(numbers2.getNumbers()[0],null,numbers2.getBound()[0],null);
+		canvas.drawBitmap(numbers2.getNumbers()[1],null,numbers2.getBound()[1],null);
 	}
 	
 	public void update()
 	{
 		griglia.Shuffle();
 		this.postInvalidate();
+	}
+	public void timeUpdate(int a)
+	{
+		numbers2.display(a);
 	}
 
 	@Override

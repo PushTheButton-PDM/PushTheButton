@@ -25,7 +25,7 @@ public class Numbers {
 	public Bitmap nove;
 	public Bitmap zero;
 	
-	public Numbers(Context context)
+	public Numbers(Context context,boolean a)
 	{
 		try{
 			AssetManager assetManager=context.getAssets();
@@ -58,8 +58,15 @@ public class Numbers {
 		} finally {
 
 		}
-		bound1=new RectF(0,0,80,110);
-		bound2=new RectF(80,0,160,110);
+		if(a){
+			bound1=new RectF(0,0,80,110);
+			bound2=new RectF(80,0,160,110);
+		}
+		else{
+			bound1=new RectF(320,0,400,110);
+			bound2=new RectF(400,0,480,110);
+		}
+				
 		
 	}
 	public RectF[] getBound()

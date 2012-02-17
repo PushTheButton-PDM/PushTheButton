@@ -54,9 +54,13 @@ public class Griglia {
 				}
 		for(int i=0;i<4;i++)
 		{
+				double a=Math.random();
 				randRow=(int)(Math.random()*5);
 				randColumn=(int)(Math.random()*6);
-				griglia[randRow][randColumn]=green;
+				if(a<0.2)
+				     griglia[randRow][randColumn]=red;
+				else
+					 griglia[randRow][randColumn]=green;
 		}
 	}
 	

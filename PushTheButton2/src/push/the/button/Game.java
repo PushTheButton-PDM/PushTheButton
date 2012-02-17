@@ -1,5 +1,6 @@
 package push.the.button;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -8,9 +9,20 @@ import java.util.TimerTask;
 
 
 public class Game extends Activity {
-	GameView game;
-	 Timer timer=new Timer();
-	 TimerTask sendStart= new TimerTask() {
+		GameView game;
+		int time=0;
+		Timer timer2=new Timer();
+		TimerTask sendStart2= new TimerTask() {
+		 @Override
+		 public void run(){
+			 game.timeUpdate(time);
+			 time++;
+			 if(time>10)
+				 startActivity(new Intent(Game.this, LastActivity.class));
+		 }
+	 };
+		Timer timer=new Timer();
+		TimerTask sendStart= new TimerTask() {
 		 @Override
 		 public void run(){
 			 game.update();
@@ -21,10 +33,12 @@ public class Game extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         game=new GameView(this);
-        timer.schedule(sendStart,1000,2000);
+        
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        WindowManager.LayoutParams.FLAG_FULLSCREEN); 	
+        timer.schedule(sendStart,2000,1000);
+        timer2.schedule(sendStart2,2000,1000);
         setContentView(game);
     }
 }
