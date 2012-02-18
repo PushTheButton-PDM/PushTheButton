@@ -28,30 +28,60 @@ public class Numbers {
 	public Numbers(Context context,boolean a)
 	{
 		try{
-			AssetManager assetManager=context.getAssets();
-			InputStream inputStream = assetManager.open("zero.png");
-			zero = BitmapFactory.decodeStream(inputStream);
-			inputStream = assetManager.open("uno.png");
-			uno = BitmapFactory.decodeStream(inputStream);
-			inputStream = assetManager.open("due.png");
-			due = BitmapFactory.decodeStream(inputStream);
-			inputStream = assetManager.open("tre.png");
-			tre = BitmapFactory.decodeStream(inputStream);
-			inputStream = assetManager.open("quattro.png");
-			quattro = BitmapFactory.decodeStream(inputStream);
-			inputStream = assetManager.open("cinque.png");
-			cinque = BitmapFactory.decodeStream(inputStream);
-			inputStream = assetManager.open("sei.png");
-			sei = BitmapFactory.decodeStream(inputStream);
-			inputStream = assetManager.open("sette.png");
-			sette = BitmapFactory.decodeStream(inputStream);
-			inputStream = assetManager.open("otto.png");
-			otto = BitmapFactory.decodeStream(inputStream);
-			inputStream = assetManager.open("nove.png");
-			nove = BitmapFactory.decodeStream(inputStream);
-			inputStream.close();
-			number1=zero;
-			number2=zero;
+			if(a)
+			{
+				AssetManager assetManager=context.getAssets();
+				InputStream inputStream = assetManager.open("zero.png");
+				zero = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("uno.png");
+				uno = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("due.png");
+				due = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("tre.png");
+				tre = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("quattro.png");
+				quattro = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("cinque.png");
+				cinque = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("sei.png");
+				sei = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("sette.png");
+				sette = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("otto.png");
+				otto = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("nove.png");
+				nove = BitmapFactory.decodeStream(inputStream);
+				inputStream.close();
+				number1=zero;
+				number2=zero;
+			}
+			else
+			{
+				AssetManager assetManager=context.getAssets();
+				InputStream inputStream = assetManager.open("zerog.png");
+				zero = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("unog.png");
+				uno = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("dueg.png");
+				due = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("treg.png");
+				tre = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("quattrog.png");
+				quattro = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("cinqueg.png");
+				cinque = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("seig.png");
+				sei = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("setteg.png");
+				sette = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("ottog.png");
+				otto = BitmapFactory.decodeStream(inputStream);
+				inputStream = assetManager.open("noveg.png");
+				nove = BitmapFactory.decodeStream(inputStream);
+				inputStream.close();
+				number1=zero;
+				number2=zero;
+			}
 		}
 		catch (IOException e) {
 
