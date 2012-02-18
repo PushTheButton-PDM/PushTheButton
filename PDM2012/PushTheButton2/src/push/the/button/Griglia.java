@@ -1,0 +1,105 @@
+package push.the.button;
+import android.graphics.RectF;
+import java.io.IOException;
+import java.io.InputStream;
+
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.content.Context;
+
+public class Griglia {								//Creazione della classe griglia finalizzata alla costruzione della matrice di bottoni
+	
+	
+	public Bitmap[][] griglia=new Bitmap[5][6];		//Array di Bitmap di dimensione 5 (colonne) * 6 (righe),ad ogni bitmap sarà associato un bottone
+	public Bitmap green;							//Bitmap che sarà associato al green button
+	public Bitmap gray;								//Bitmap che sarà associato al gray button
+	public Bitmap red;								//Bitmap che sarà associato al red button
+	public RectF[][] bounds=new RectF[5][6];		//Array di oggetti RectF,che costituiscono il bound di ogni bottone
+	public Griglia(Context context)					//Costruttore della classe "Griglia"
+	{
+		try{
+			AssetManager assetManager=context.getAssets();					//Creo un oggetto di classe AssetManager necessario per prelevare le risorse di tipo Assets
+			InputStream inputStream=assetManager.open("greenbutton.png");	//Leggo e memorizzo nell'oggetto inputStream, la risorsa "greenbutton.png" presente nella cartella Assets
+			green=BitmapFactory.decodeStream(inputStream);					//Decodifico l'inputStream,cioè l'immagine, in un oggetto Bitmap, e viene memorizzatio nell'oggetto "green"
+			inputStream=assetManager.open("graybutton.png");				//Leggo e memorizzo nell'oggetto inputStream, la risorsa "graybutton.png" presente nella cartella Assets
+			gray=BitmapFactory.decodeStream(inputStream);					//Decodifico l'inputStream,cioè l'immagine, in un oggetto Bitmap, e viene memorizzatio nell'oggetto "gray"
+			inputStream=assetManager.open("redbutton.png");					//Leggo e memorizzo nell'oggetto inputStream, la risorsa "redbutton.png" presente nella cartella Assets
+			red=BitmapFactory.decodeStream(inputStream);					//Decodifico l'inputStream,cioè l'immagine, in un oggetto Bitmap, e viene memorizzatio nell'oggetto "red"
+			
+			inputStream.close();							// Chiude il flusso di input e rilascia tutte le risorse di sistema associate al flusso.
+		    }
+		
+		catch(IOException e) { }
+
+		for(int i=0;i<5;i++)
+			for(int j=0;j<6;j++)
+				{
+					bounds[i][j]=new RectF(15 + i * 90, 220 + j * 90, 95 + i * 90,300 + j * 90); //Tramite i due cicli "for" annidati vengono creati tutti i bound(contenitori) per ciscun pulsante
+					griglia[i][j]=gray;		//Si settano tutti i bottoni, rappresentati dall'array di bitmap "griglia", con il bottone grigio ovvero il bitmap "gray"
+				}
+		
+	}
+	public void Shuffle()		//Il metodo "shuffle" invocato su oggetto di classe "griglia" permette di posizionare i bottoni verdi e rossi, in modo casuale nell'arrat di bitmap
+	{
+		int randRow;
+		int randColumn;
+		for(int i=0;i<5;i++)
+			for(int j=0;j<6;j++)
+				{
+					bounds[i][j]=new RectF(15 + i * 90, 220 + j * 90, 95 + i * 90,300 + j * 90);	//Tramite i due cicli "for" annidati vengono creati tutti i bound(contenitori) per ciscun pulsante
+					griglia[i][j]=gray;			//Si settano tutti i bottoni, rappresentati dall'array di bitmap "griglia", con il bottone grigio ovvero il bitmap "gray"
+				}
+		for(int i=0;i<4;i++)	//Il ciclio viene ripetuto 4 volte,in quanto 4 è in numero di bottoni si vorranno visualizzare sull'activity di gioco
+		{
+				double a=Math.random();				//Generazione di un numero casuale
+				randRow=(int)(Math.random()*5);		//Generazione di una riga casuale
+				randColumn=(int)(Math.random()*6);	//Generazione di una colonna casuale
+				if(a<0.2)										
+				     griglia[randRow][randColumn]=red;	//Se a<0.2 (probabilità del 20%) viene copiato nella posizione corrente della griglia, il bottone rosso
+				else
+					 griglia[randRow][randColumn]=green; //Se a>0.2,allora nella posizione corrente della griglia viene copiato il bottone verde
+		}
+	}
+	
+	public int getColor(int a, int b) //Il metodo "getColor()",tramite un flag int, permette di capire quale è il colore del pulsante con indice [a][b] dell'array 
+	{
+			if(griglia[a][b]==red)
+				return 0;					//Se il bottone è rosso si ritorna il flag 0;
+			else if(griglia[a][b]==green)
+				return 1;					//Se il bottone è verde si ritorna il flag 1;
+			else 		
+				return 2;					//Se il bottone è grigio si ritorna il flag 2;
+		
+	}
+	
+	public RectF getBound(int a, int b)		//Il metodo "getBound" restituisce la RectF corrispondente all'elemento dell'oggetto "Griglia" di indice [a][b]
+	{
+		return bounds[a][b];
+	}
+	
+	public Bitmap getBitmap(int a, int b)   //Il metodo "getBitmap" restituisce il bitmap di indice [a][b] dell'oggetto "Griglia" sul quale viene invocato
+	{
+		return griglia[a][b];
+	}
+	
+	public void setGrayButton(int a, int b) //Il metodo "setGrayButton" permette di associare il bottone grigio al bitmap di indice [a][b] dell'oggetto "Griglia"			
+	{
+		griglia[a][b]=gray;
+	}
+	public int[] coord(double x, double y) //Il metodo "coord" dati due interi x e y,restituisce gli indici del bitmap dell'oggetto "Griglia" intercettato da x e y
+	{
+		int[] a =new int[2];
+		for(int i=0;i<5;i++)
+			for(int j=0;j<6;j++)
+				{
+					if(x>15 + i * 90 & y>220 + j * 90 & x<95 + i * 90 & y<300 + j * 90)
+						{
+							a[0]=i;
+							a[1]=j;
+						}
+						
+				}
+		return a;
+	}
+}
