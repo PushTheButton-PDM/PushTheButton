@@ -28,7 +28,7 @@ public class Numbers {
 	public Numbers(Context context,boolean a)
 	{
 		try{
-			if(a)
+			if(a==false)
 			{
 				AssetManager assetManager=context.getAssets();
 				InputStream inputStream = assetManager.open("zero.png");

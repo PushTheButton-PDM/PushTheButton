@@ -9,6 +9,8 @@ import android.graphics.BitmapFactory;
 import android.content.Context;
 
 public class Griglia {								//Creazione della classe griglia finalizzata alla costruzione della matrice di bottoni
+	
+	
 	public Bitmap[][] griglia=new Bitmap[5][6];		//Array di Bitmap di dimensione 5 (colonne) * 6 (righe),ad ogni bitmap sarà associato un bottone
 	public Bitmap green;							//Bitmap che sarà associato al green button
 	public Bitmap gray;								//Bitmap che sarà associato al gray button

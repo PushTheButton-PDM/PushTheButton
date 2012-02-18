@@ -1,13 +1,9 @@
 package push.the.button;
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Chronometer;
-import android.widget.LinearLayout;
-
 import java.util.Timer;
 import java.util.TimerTask;
  
@@ -15,14 +11,14 @@ import java.util.TimerTask;
 public class Game extends Activity {
 	
 		GameView game;
-		int time=0;
+		int time=15;
 		Timer timer2=new Timer();
 		TimerTask sendStart2= new TimerTask() {
 		 @Override
 		 public void run(){
 			 game.timeUpdate(time);
-			 time++;
-			 if(time>10)
+			 time--;
+			 if(time==0)
 			 
 			 {
 				 sendStart2.cancel();

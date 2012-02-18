@@ -10,7 +10,7 @@ public class GameView extends View {
 	public Griglia griglia;
 	public Numbers numbers;
 	public Numbers numbers2;
-
+	
 	public GameView(Context context)
 	{
 		super(context);
