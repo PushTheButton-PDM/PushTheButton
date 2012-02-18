@@ -28,6 +28,7 @@ public class Game extends Activity {
 				 sendStart2.cancel();
 				 Intent intent = new Intent(Game.this, LastActivity.class);
 				 intent.putExtra("score",game.getCount());
+				 finish();
 				 startActivity(intent);
 			 }
 		 }

@@ -23,6 +23,7 @@ public class PushTheButton2Activity extends Activity{
 	{
 		Intent intent = new Intent();
 	    intent.setClass(this, Game.class);		// Intent per il lancio dell'activity di gioco
+	    finish();
 	    startActivity(intent);
 		
 	}
@@ -62,6 +63,7 @@ public class PushTheButton2Activity extends Activity{
 			      }
 			      else if(x>130 && x<330 && y>470 && y<670)		//Se il touch è stato rilevato su tali coordinate,che sono quelle corrispondenti al bound del
 			      {												//tasto "rating" allora viene lanciata l'activity relativa ai punteggi memorizzati su server
+			    	  finish();
 			    	  startActivity(new Intent(PushTheButton2Activity.this, Game.class));
 			      }
 				
