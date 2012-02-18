@@ -1,14 +1,19 @@
 package push.the.button;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Chronometer;
+import android.widget.LinearLayout;
+
 import java.util.Timer;
 import java.util.TimerTask;
-
+ 
 
 public class Game extends Activity {
+	
 		GameView game;
 		int time=0;
 		Timer timer2=new Timer();
@@ -18,7 +23,13 @@ public class Game extends Activity {
 			 game.timeUpdate(time);
 			 time++;
 			 if(time>10)
-				 startActivity(new Intent(Game.this, LastActivity.class));
+			 
+			 {
+				 sendStart2.cancel();
+				 Intent intent = new Intent(Game.this, LastActivity.class);
+				 intent.putExtra("score",game.getCount());
+				 startActivity(intent);
+			 }
 		 }
 	 };
 		Timer timer=new Timer();

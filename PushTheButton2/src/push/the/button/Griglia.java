@@ -8,12 +8,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.content.Context;
 
-public class Griglia {
-	public Bitmap[][] griglia=new Bitmap[5][6];
-	public Bitmap green;
-	public Bitmap gray;
-	public Bitmap red;
-	public RectF[][] bounds=new RectF[5][6];
+public class Griglia {								//Creazione della classe griglia finalizzata alla costruzione della matrice di bottoni
+	public Bitmap[][] griglia=new Bitmap[5][6];		//Array di Bitmap di dimensione 5 (colonne) * 6 (righe),ad ogni bitmap sarà associato un bottone
+	public Bitmap green;							//Bitmap che sarà associato al green button
+	public Bitmap gray;								//Bitmap che sarà associato al gray button
+	public Bitmap red;								//Bitmap che sarà associato al red button
+	public RectF[][] bounds=new RectF[5][6];		//Array di oggetti RectF,che costituiscono il bound di ogni bottone
 	public Griglia(Context context)
 	{
 		try{
@@ -24,16 +24,12 @@ public class Griglia {
 			gray=BitmapFactory.decodeStream(inputStream);
 			inputStream=assetManager.open("redbutton.png");
 			red=BitmapFactory.decodeStream(inputStream);
+			
 			inputStream.close();
 		    }
-		catch(IOException e)
-		{
-			
-		}
-		finally
-		{
-			
-		}
+		
+		catch(IOException e) { }
+
 		for(int i=0;i<5;i++)
 			for(int j=0;j<6;j++)
 				{

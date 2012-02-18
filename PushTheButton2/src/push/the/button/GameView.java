@@ -65,5 +65,11 @@ public class GameView extends View {
 		}
 		return false;
 	}
+	
+	public String getCount ()
+	{
+		String str = String.valueOf(contatore);
+		return str; 
+	}
 
 }
