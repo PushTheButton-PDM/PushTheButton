@@ -1,6 +1,7 @@
 package push.the.button;
 
 import android.os.Bundle;
+import android.text.AndroidCharacter;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -9,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -25,14 +28,18 @@ public class LastActivity extends Activity {
         WindowManager.LayoutParams.FLAG_FULLSCREEN); 	
         setContentView(R.layout.submit);
         TextView namelabel = new TextView (this);
+        namelabel.setTextSize(25);
         namelabel.setText("NickName :   ");
         EditText name = new EditText(this);
-        name.setWidth(300);
+        name.setWidth(250);
         TextView scorelabel = new TextView(this);
+        scorelabel.setTextSize(25);
         scorelabel.setText("Score :   ");
         TextView score = new TextView(this);
         score.setText(getIntent().getExtras().getString("score"));
-       
+        score.setTextSize(25);
+        score.setMinHeight(100);
+        
         TableLayout tl = new TableLayout(this);	//Creo la tabella composta dalla due rigne che seguono ognuna delle quali ha due colonne come campi
         
         TableRow tr1 = new TableRow (this);		//Creo una riga della tabella in cui inserisco una textview e un edittext
