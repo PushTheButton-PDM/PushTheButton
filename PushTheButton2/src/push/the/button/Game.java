@@ -1,12 +1,9 @@
 package push.the.button;
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Chronometer;
-import android.widget.LinearLayout;
 
 import java.util.Timer;
 import java.util.TimerTask;
