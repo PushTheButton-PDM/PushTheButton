@@ -21,6 +21,7 @@ public class Game extends Activity {
 			 if(time==0)
 			 
 			 {
+				 sendStart.cancel();
 				 sendStart2.cancel();
 				 Intent intent = new Intent(Game.this, LastActivity.class);
 				 intent.putExtra("score",game.getCount());
