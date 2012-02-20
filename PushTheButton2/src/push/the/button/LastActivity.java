@@ -20,6 +20,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+
 import java.io.FileInputStream;
 import java.io.File;
 import java.net.URL;
@@ -161,6 +163,7 @@ public class LastActivity extends Activity {
         TextView score = new TextView(this);
         score.setText(getIntent().getExtras().getString("score"));
         score.setTextSize(25);
+        score.setTextColor(Color.GREEN);
         score.setMinHeight(100);
         
         TableLayout tl = new TableLayout(this);	//Creo la tabella composta dalla due rigne che seguono ognuna delle quali ha due colonne come campi
