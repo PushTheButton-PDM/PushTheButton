@@ -45,7 +45,7 @@ public class LastActivity extends Activity {
 		byte[] buffer;
 		int maxBufferSize = 1*1024*1024;
 		String responseFromServer = "";
-		String urlString = "http://192.160.1.7/index.php";
+		String urlString = "http://10.0.2.2/index.php";
 
 		try
 		{
