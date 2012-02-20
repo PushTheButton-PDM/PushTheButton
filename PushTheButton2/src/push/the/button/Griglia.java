@@ -10,7 +10,8 @@ import android.content.Context;
 
 public class Griglia {								//Creazione della classe griglia finalizzata alla costruzione della matrice di bottoni
 	
-	
+	public Bitmap bigButton;
+	public RectF bigBound;
 	public Bitmap[][] griglia=new Bitmap[5][6];		//Array di Bitmap di dimensione 5 (colonne) * 6 (righe),ad ogni bitmap sarà associato un bottone
 	public Bitmap green;							//Bitmap che sarà associato al green button
 	public Bitmap gray;								//Bitmap che sarà associato al gray button
@@ -38,7 +39,8 @@ public class Griglia {								//Creazione della classe griglia finalizzata alla 
 					bounds[i][j]=new RectF(15 + i * 90, 220 + j * 90, 95 + i * 90,300 + j * 90); //Tramite i due cicli "for" annidati vengono creati tutti i bound(contenitori) per ciscun pulsante
 					griglia[i][j]=gray;		//Si settano tutti i bottoni, rappresentati dall'array di bitmap "griglia", con il bottone grigio ovvero il bitmap "gray"
 				}
-		
+		bigBound=new RectF(190,0,290,100);
+		bigButton=green;
 	}
 	public void Shuffle()		//Il metodo "shuffle" invocato su oggetto di classe "griglia" permette di posizionare i bottoni verdi e rossi, in modo casuale nell'arrat di bitmap
 	{
@@ -50,6 +52,11 @@ public class Griglia {								//Creazione della classe griglia finalizzata alla 
 					bounds[i][j]=new RectF(15 + i * 90, 220 + j * 90, 95 + i * 90,300 + j * 90);	//Tramite i due cicli "for" annidati vengono creati tutti i bound(contenitori) per ciscun pulsante
 					griglia[i][j]=gray;			//Si settano tutti i bottoni, rappresentati dall'array di bitmap "griglia", con il bottone grigio ovvero il bitmap "gray"
 				}
+		bigBound=new RectF(190,0,290,100);
+		bigButton=green;
+		double b=Math.random();
+		if(b<0.5)
+		bigButton=red;
 		for(int i=0;i<4;i++)	//Il ciclio viene ripetuto 4 volte,in quanto 4 è in numero di bottoni si vorranno visualizzare sull'activity di gioco
 		{
 				double a=Math.random();				//Generazione di un numero casuale
@@ -72,6 +79,25 @@ public class Griglia {								//Creazione della classe griglia finalizzata alla 
 				return 2;					//Se il bottone è grigio si ritorna il flag 2;
 		
 	}
+	
+	public int getBigColor()
+	{
+		if( bigButton==green)
+			return 1;
+		else
+			return 0;
+	}
+	
+	public RectF getBigBound()
+	{
+		return bigBound;
+	}
+	
+	public Bitmap getBigBitmap()
+	{
+		return bigButton;
+	}
+	
 	
 	public RectF getBound(int a, int b)		//Il metodo "getBound" restituisce la RectF corrispondente all'elemento dell'oggetto "Griglia" di indice [a][b]
 	{

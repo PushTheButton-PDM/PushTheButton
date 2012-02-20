@@ -209,6 +209,7 @@ public class LastActivity extends Activity {
 			public void onClick(View v) 
 			{	
 				Intent intent = new Intent(LastActivity.this,Game.class);
+				finish();
 				startActivity(intent);
 			}
 		});
