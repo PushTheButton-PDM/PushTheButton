@@ -46,7 +46,7 @@ public class Game extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         WindowManager.LayoutParams.FLAG_FULLSCREEN); 	
-        timer.schedule(sendStart,2000,3500);
+        timer.schedule(sendStart,2000,1500);
         timer2.schedule(sendStart2,2000,1000);
         setContentView(game);
     }

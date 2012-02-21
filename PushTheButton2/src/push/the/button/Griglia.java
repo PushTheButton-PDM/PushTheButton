@@ -13,7 +13,10 @@ public class Griglia {								//Creazione della classe griglia finalizzata alla 
 	public Bitmap bigButton;
 	public RectF bigBound;
 	public Bitmap[][] griglia=new Bitmap[5][6];		//Array di Bitmap di dimensione 5 (colonne) * 6 (righe),ad ogni bitmap sarà associato un bottone
-	public Bitmap green;							//Bitmap che sarà associato al green button
+	public Bitmap green;//Bitmap che sarà associato al green button
+	public Bitmap green2;
+	public Bitmap gray2;	
+	public Bitmap red2;
 	public Bitmap gray;								//Bitmap che sarà associato al gray button
 	public Bitmap red;								//Bitmap che sarà associato al red button
 	public RectF[][] bounds=new RectF[5][6];		//Array di oggetti RectF,che costituiscono il bound di ogni bottone
@@ -27,7 +30,12 @@ public class Griglia {								//Creazione della classe griglia finalizzata alla 
 			gray=BitmapFactory.decodeStream(inputStream);					//Decodifico l'inputStream,cioè l'immagine, in un oggetto Bitmap, e viene memorizzatio nell'oggetto "gray"
 			inputStream=assetManager.open("redbutton.png");					//Leggo e memorizzo nell'oggetto inputStream, la risorsa "redbutton.png" presente nella cartella Assets
 			red=BitmapFactory.decodeStream(inputStream);					//Decodifico l'inputStream,cioè l'immagine, in un oggetto Bitmap, e viene memorizzatio nell'oggetto "red"
-			
+			inputStream=assetManager.open("greenbutton2.png");	//Leggo e memorizzo nell'oggetto inputStream, la risorsa "greenbutton.png" presente nella cartella Assets
+			green2=BitmapFactory.decodeStream(inputStream);	
+			inputStream=assetManager.open("redbutton2.png");	//Leggo e memorizzo nell'oggetto inputStream, la risorsa "greenbutton.png" presente nella cartella Assets
+			red2=BitmapFactory.decodeStream(inputStream);	
+			inputStream=assetManager.open("graybutton2.png");	//Leggo e memorizzo nell'oggetto inputStream, la risorsa "greenbutton.png" presente nella cartella Assets
+			gray2=BitmapFactory.decodeStream(inputStream);	
 			inputStream.close();							// Chiude il flusso di input e rilascia tutte le risorse di sistema associate al flusso.
 		    }
 		
@@ -40,7 +48,7 @@ public class Griglia {								//Creazione della classe griglia finalizzata alla 
 					griglia[i][j]=gray;		//Si settano tutti i bottoni, rappresentati dall'array di bitmap "griglia", con il bottone grigio ovvero il bitmap "gray"
 				}
 		bigBound=new RectF(190,0,290,100);
-		bigButton=green;
+		bigButton=gray2;
 	}
 	public void Shuffle()		//Il metodo "shuffle" invocato su oggetto di classe "griglia" permette di posizionare i bottoni verdi e rossi, in modo casuale nell'arrat di bitmap
 	{
@@ -53,16 +61,16 @@ public class Griglia {								//Creazione della classe griglia finalizzata alla 
 					griglia[i][j]=gray;			//Si settano tutti i bottoni, rappresentati dall'array di bitmap "griglia", con il bottone grigio ovvero il bitmap "gray"
 				}
 		bigBound=new RectF(190,0,290,100);
-		bigButton=green;
+		bigButton=green2;
 		double b=Math.random();
 		if(b<0.5)
-		bigButton=red;
+			bigButton=red2;
 		for(int i=0;i<4;i++)	//Il ciclio viene ripetuto 4 volte,in quanto 4 è in numero di bottoni si vorranno visualizzare sull'activity di gioco
 		{
 				double a=Math.random();				//Generazione di un numero casuale
 				randRow=(int)(Math.random()*5);		//Generazione di una riga casuale
 				randColumn=(int)(Math.random()*6);	//Generazione di una colonna casuale
-				if(a<0.2)										
+				if(a<0.5)										
 				     griglia[randRow][randColumn]=red;	//Se a<0.2 (probabilità del 20%) viene copiato nella posizione corrente della griglia, il bottone rosso
 				else
 					 griglia[randRow][randColumn]=green; //Se a>0.2,allora nella posizione corrente della griglia viene copiato il bottone verde
@@ -82,7 +90,7 @@ public class Griglia {								//Creazione della classe griglia finalizzata alla 
 	
 	public int getBigColor()
 	{
-		if( bigButton==green)
+		if( bigButton==green2)
 			return 1;
 		else
 			return 0;
