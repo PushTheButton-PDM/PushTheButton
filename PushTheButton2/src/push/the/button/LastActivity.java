@@ -1,15 +1,19 @@
 package push.the.button;
 
+import java.io.OutputStreamWriter;
 import android.os.Bundle;
 import android.view.Gravity;
-import server.ClientSocket;
-import server.DatiScambiati;
+import java.io.FileOutputStream;
+import java.net.HttpURLConnection;
+import android.util.Log;
+import java.io.DataOutputStream;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import java.io.DataInputStream;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -17,6 +21,18 @@ import android.widget.TextView;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+
+import java.io.FileInputStream;
+import java.io.File;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.URL;
+import java.net.MalformedURLException;
+import java.io.IOException;
+
+import server.ClientSocket;
+import server.DatiScambiati;
+
 
 
 public class LastActivity extends Activity {
@@ -28,6 +44,7 @@ public class LastActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         WindowManager.LayoutParams.FLAG_FULLSCREEN); 	
+        setContentView(R.layout.submit);
         TextView namelabel = new TextView (this);
         namelabel.setTextSize(25);
         namelabel.setText("NickName :   ");
@@ -85,7 +102,6 @@ public class LastActivity extends Activity {
 			public void onClick(View v) 
 			{	
 				Intent intent = new Intent(LastActivity.this,Game.class);
-				finish();
 				startActivity(intent);
 			}
 		});
@@ -97,18 +113,13 @@ public class LastActivity extends Activity {
 		@Override
 			public void onClick(View v) 
 			{	
-		     try {
-		    	 	 String s=getIntent().getExtras().getString("score");
-		    	 	 DatiScambiati data= new DatiScambiati(0,name.getText().toString(),s);
-		    	 	 DatiScambiati[] d=new DatiScambiati[1];
-		    	 	 d[0]=data;
-		    	 	 ClientSocket socket = new ClientSocket("10.0.2.2");
-		    	 	 socket.sendMessage(d);
-		    	 	 socket.recvMessage();
-		      	  }
-		     catch (Exception e)
-		     {
-		     }
+		     try { 
+		    	 	DatiScambiati data = new DatiScambiati(0,name.getText().toString(),getIntent().getExtras().toString());            
+		    	 	ClientSocket socket = new ClientSocket ("10.0.2.2");
+		    	 	socket.sendMessage(data);
+		    		socket.recvMessage();
+		    		
+		      }
 		     finally
 		     {
 		     }

@@ -31,7 +31,6 @@ public class GameView extends View {
 		canvas.drawBitmap(numbers.getNumbers()[1], null,numbers.getBound()[1],null);
 		canvas.drawBitmap(numbers2.getNumbers()[0],null,numbers2.getBound()[0],null);
 		canvas.drawBitmap(numbers2.getNumbers()[1],null,numbers2.getBound()[1],null);
-		canvas.drawBitmap(griglia.getBigBitmap(),null,griglia.getBigBound(),null);
 	}
 	
 	public void update()
@@ -50,17 +49,14 @@ public class GameView extends View {
 		float x = event.getX();
 		float y = event.getY();
 		int[] a=griglia.coord(x, y);
-		int c=griglia.getBigColor();
-		int p=griglia.getColor(a[0], a[1]);
-		if(p!=c & p!=2)
+		if(griglia.getColor(a[0], a[1])==0 & contatore!=0)
 		{
-			if(contatore!=0)
-				contatore--;
+			contatore--;
 			numbers.display(contatore);
 			griglia.setGrayButton(a[0], a[1]);
 			this.postInvalidate();
 		}
-		else if(p==c)
+		else if(griglia.getColor(a[0], a[1])==1)
 		{
 			contatore++;
 			numbers.display(contatore);
