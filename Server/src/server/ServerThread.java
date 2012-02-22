@@ -110,36 +110,37 @@ public class ServerThread extends Thread
 		//return di default
 		return null;
 	}
-	public void Save(DatiScambiati data)
+	
+	public void Save(DatiScambiati data)		//Metodo per il salvataggio (scrittura) dell'array di "DatiScambiati" ricevuti dal client
 	{
-		File f= new File("/home/alex/data/data.dat");
+		File f= new File("/home/simone/data/data.dat");
 		DatiScambiati[] g;
-		if(f.length()>3)
+		if(f.length()>3)	//Questo controllo serve a verificare se il file "data.dat" è maggiore di 3 Byte, allora significa che già sono stati scritti dati al suo interno
 		{
 			try{
-			 	FileInputStream fis = new FileInputStream(f);
-		        GZIPInputStream gzis = new GZIPInputStream(fis);
-		        ObjectInputStream in = new ObjectInputStream(gzis);
-		        DatiScambiati[] d = (DatiScambiati[])in.readObject();
+			 	FileInputStream fis = new FileInputStream(f);	//Si crea un nuovo flusso di lettura in ingresso dal path individuato dalla stringa "f"
+		        GZIPInputStream gzis = new GZIPInputStream(fis);	//Si crea un nuovo flusso di lettura in ingresso per dati compressi GZIP
+		        ObjectInputStream in = new ObjectInputStream(gzis);	//Si crea il flusso dati in ingresso per la lettura degli oggetti
+		        DatiScambiati[] d = (DatiScambiati[])in.readObject();	//Si memorizza nell'array di "DatiScambiati" l'oggetto ricevuto
 		        int a=d.length;
 		        g=new DatiScambiati[a+1];
 		        for(int i=0;i<a;i++)
 		        	g[i]=d[i];
 		        g[a]=data;
-		        Sort(g);
-		        in.close();
+		        Sort(g);	//Ordina in modo decresecente rispetto al punteggio
+		        in.close(); //Si rilascia il flusso d'ingresso
 		        FileOutputStream fos = new FileOutputStream(f);
 		        GZIPOutputStream gzos = new GZIPOutputStream(fos);
 		        ObjectOutputStream out = new ObjectOutputStream(gzos);
-		        out.writeObject(g);
+		        out.writeObject(g);		//Scrivo l'array di "DatiScambiati" nel file con path "f"
 		        out.flush();
-		        out.close();
+		        out.close();	//Si rilascia il flusso d'uscita
 			}
 			catch(Exception e)
 			{
 			}
 		}
-		else
+		else	//Il file "data.dat" è vuoto,allora si inizializza un array di una dimensione, essendo il primo oggetto che si scrive in tale file
 		{
 			g=new DatiScambiati[1];
 			g[0]=data;
@@ -160,12 +161,13 @@ public class ServerThread extends Thread
 		}
 		
 	}
-	public DatiScambiati[] Load()
+	
+	public DatiScambiati[] Load()	//Questo metodo permette di leggere l'array di "DatiScambiati" dal file "f"
 	{
 		try
 		{
 			
-			File f= new File("/home/alex/data/data.dat");
+			File f= new File("/home/simone/data/data.dat");
 			if(f.length()>3)
 			{
 				FileInputStream fis = new FileInputStream(f);
@@ -183,16 +185,20 @@ public class ServerThread extends Thread
 			return null;
 		}
 	}
-	public void Sort(DatiScambiati[] a) {
+	public void Sort(DatiScambiati[] a) 	//Questo metodo ordina l'array di "DatiScambiati" in modo decrescente in funzione del punteggio
+	{
 		DatiScambiati temp =null;
-		for(int j=0;j<a.length;j++) {
-			for(int i=j;i<a.length;i++) {
-				if(Integer.parseInt(a[i].contenutoFile)>Integer.parseInt(a[j].contenutoFile)) {
+		for(int j=0;j<a.length;j++) 
+		{
+			for(int i=j;i<a.length;i++) 
+			{
+				if(Integer.parseInt(a[i].contenutoFile)>Integer.parseInt(a[j].contenutoFile))
+				{
 					temp=a[j]; 
 					a[j]=a[i];
 					a[i]=temp;
 				}
 			}
-			}
 		}
+	}
 }
