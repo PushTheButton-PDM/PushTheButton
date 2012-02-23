@@ -44,7 +44,7 @@ public class RatingActivity extends Activity {
     	catch(Exception e)
     	{
     		String[] arraydata=new String[1];
-			arraydata[0]="Server momentaniamente fuori servizio";
+			arraydata[0]="Server momentaneamente fuori servizio";
 			adapter = new ArrayAdapter<String> (this,R.layout.row,R.id.textView1,arraydata);
     		
     	}

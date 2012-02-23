@@ -106,7 +106,7 @@ public class LastActivity extends Activity {
 		    	 	int lungedText = text.length();
 		    	 	if(lungedText==0)  //controlla se non è stato inserito il nome (testo vuoto)
 		    	 	 {
-		    	 		Toast.makeText(getApplicationContext(), "enter the name please", Toast.LENGTH_LONG).show();
+		    	 		Toast.makeText(getApplicationContext(), "Enter the name please", Toast.LENGTH_LONG).show();
 		    	 	 }
 		    	 	else
 		    	 	 {
@@ -125,7 +125,7 @@ public class LastActivity extends Activity {
 		    	 		}
 		    	 		catch(Exception e)
 		    	 		{
-		    	 			Toast.makeText(getApplicationContext(),"registration denied", Toast.LENGTH_LONG).show();
+		    	 			Toast.makeText(getApplicationContext(),"Registration denied", Toast.LENGTH_LONG).show();
 		    	 			Intent intent = new Intent(LastActivity.this,PushTheButton2Activity.class);
 		    	 			finish();
 		    	 			startActivity(intent);

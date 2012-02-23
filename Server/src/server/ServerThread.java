@@ -53,7 +53,7 @@ public class ServerThread extends Thread
 				case 0: //salva il file
 					System.out.println("Ricevuto il messaggio 0");
 					risposta = new DatiScambiati[1];
-					risposta[0]=new DatiScambiati(0, "prova.log", "registration was successful");
+					risposta[0]=new DatiScambiati(0, "prova.log", "Registration done");
 					Save(mess[0]);
 					sendOutput.writeObject(risposta);
 					break;
@@ -121,20 +121,26 @@ public class ServerThread extends Thread
 			 	FileInputStream fis = new FileInputStream(f);	//Si crea un nuovo flusso di lettura in ingresso dal path individuato dalla stringa "f"
 		        GZIPInputStream gzis = new GZIPInputStream(fis);	//Si crea un nuovo flusso di lettura in ingresso per dati compressi GZIP
 		        ObjectInputStream in = new ObjectInputStream(gzis);	//Si crea il flusso dati in ingresso per la lettura degli oggetti
-		        DatiScambiati[] d = (DatiScambiati[])in.readObject();	//Si memorizza nell'array di "DatiScambiati" l'oggetto ricevuto
-		        int a=d.length;
-		        g=new DatiScambiati[a+1];
-		        for(int i=0;i<a;i++)
-		        	g[i]=d[i];
-		        g[a]=data;
-		        Sort(g);	//Ordina in modo decresecente rispetto al punteggio
+		        DatiScambiati[] d = (DatiScambiati[])in.readObject();//Si memorizza nell'array di "DatiScambiati" l'oggetto ricevuto
 		        in.close(); //Si rilascia il flusso d'ingresso
-		        FileOutputStream fos = new FileOutputStream(f);
-		        GZIPOutputStream gzos = new GZIPOutputStream(fos);
-		        ObjectOutputStream out = new ObjectOutputStream(gzos);
-		        out.writeObject(g);		//Scrivo l'array di "DatiScambiati" nel file con path "f"
-		        out.flush();
-		        out.close();	//Si rilascia il flusso d'uscita
+		        if(isUnic(d,data)==0)
+		        	{
+		        		int a=d.length;
+		        		g=new DatiScambiati[a+1];
+		        		for(int i=0;i<a;i++)
+		        			g[i]=d[i];
+		        		g[a]=data;
+		        	}
+		        else
+		        	g=d;
+		        Sort(g);	//Ordina in modo decresecente rispetto al punteggio
+		 		FileOutputStream fos = new FileOutputStream(f);
+		 		GZIPOutputStream gzos = new GZIPOutputStream(fos);
+		 		ObjectOutputStream out = new ObjectOutputStream(gzos);
+		 		out.writeObject(g);		//Scrivo l'array di "DatiScambiati" nel file con path "f"
+		 		out.flush();
+		 		out.close();	//Si rilascia il flusso d'uscita
+		        
 			}
 			catch(Exception e)
 			{
@@ -184,6 +190,26 @@ public class ServerThread extends Thread
 		{
 			return null;
 		}
+	}
+	
+	public int isUnic(DatiScambiati[] d,DatiScambiati a)
+	{  for(int i=0;i<d.length;i++)
+		{
+		int b=Integer.parseInt(d[i].contenutoFile);
+		int x=Integer.parseInt(a.contenutoFile);
+		if(d[i].nomeFile.equals(a.nomeFile))
+			{
+				if(b<x)
+				{
+					d[i]=a;
+					return 1;
+				}
+				else
+					return 2;
+			}
+		
+		}
+	return 0;
 	}
 	public void Sort(DatiScambiati[] a) 	//Questo metodo ordina l'array di "DatiScambiati" in modo decrescente in funzione del punteggio
 	{
