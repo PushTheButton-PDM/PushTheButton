@@ -11,7 +11,7 @@ import java.util.TimerTask;
 public class Game extends Activity {
 	
 		GameView game;			//Si crea una variabile di istanza di classe GameView
-		int time=30;
+		int time=100;
 		Timer timer2=new Timer();				//Si crea un nuovo timer
 		TimerTask sendStart2= new TimerTask() 
 		{
@@ -47,7 +47,7 @@ public class Game extends Activity {
         game=new GameView(this);						
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN); 	
-        timer.schedule(sendStart,2000,1200);	//Lo "schedule()" permette di ripetere il TimerTask periodicamente,in questo caso ogni 1500 ms,in quanto è quello che regola l'update 
+        timer.schedule(sendStart,2000,1500);	//Lo "schedule()" permette di ripetere il TimerTask periodicamente,in questo caso ogni 1500 ms,in quanto è quello che regola l'update 
         timer2.schedule(sendStart2,2000,1000);	//Lo "schedule()" permette di ripetere il TimerTask periodicamente,in questo caso ogni 1000 ms,in quanto è quello che regola il cronometro
         setContentView(game);					//Si imposta con layout la View "game"
     }

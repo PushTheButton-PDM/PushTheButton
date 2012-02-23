@@ -113,7 +113,7 @@ public class ServerThread extends Thread
 	
 	public void Save(DatiScambiati data)		//Metodo per il salvataggio (scrittura) dell'array di "DatiScambiati" ricevuti dal client
 	{
-		File f= new File("/home/simone/data/data.dat");
+		File f= new File("/home/alex/data/data.dat");
 		DatiScambiati[] g;
 		if(f.length()>3)	//Questo controllo serve a verificare se il file "data.dat" è maggiore di 3 Byte, allora significa che già sono stati scritti dati al suo interno
 		{
@@ -167,7 +167,7 @@ public class ServerThread extends Thread
 		try
 		{
 			
-			File f= new File("/home/simone/data/data.dat");
+			File f= new File("/home/alex/data/data.dat");
 			if(f.length()>3)
 			{
 				FileInputStream fis = new FileInputStream(f);
