@@ -53,7 +53,7 @@ public class ServerThread extends Thread
 				case 0: //salva il file
 					System.out.println("Ricevuto il messaggio 0");
 					risposta = new DatiScambiati[1];
-					risposta[0]=new DatiScambiati(0, "prova.log", "contenuto di prova");
+					risposta[0]=new DatiScambiati(0, "prova.log", "registration was successful");
 					Save(mess[0]);
 					sendOutput.writeObject(risposta);
 					break;

@@ -110,17 +110,26 @@ public class LastActivity extends Activity {
 		    	 	 }
 		    	 	else
 		    	 	 {
-		    	 		String s=getIntent().getExtras().getString("score");				   //Si memorizza nella stringa "s" il punteggio della partita, trasporato in questa activity dall'intent
-			    	 	 DatiScambiati data= new DatiScambiati(0,text,s); //Si crea un oggetto "DatiScambiati",al quale si passa un id (in questo caso 0), il nome e il punteggio della partita 
-			    	 	 DatiScambiati[] d=new DatiScambiati[1];							   //Si crea un array di oggetti "DatiScambiati" con dimensione 1
-			    	 	 d[0]=data;
-			    	 	 ClientSocket socket = new ClientSocket("10.0.2.2");	//Tramite il "socket" si apre una connessione con una porta di default predefinita (4321) e verso l'indirizzo IP 10.0..2.2 (ip del server)
-			    	 	 socket.sendMessage(d);			//Si invia l'array d
-			    	 	 socket.recvMessage();			//Si riceve ciò che viene inviato dal server sulla connessione aperta
-			    	 	 Toast.makeText(getApplicationContext(), "Registration was successful", Toast.LENGTH_LONG).show();
-			    	 	 Intent intent = new Intent(LastActivity.this,PushTheButton2Activity.class);
-					     finish();				 //Si chiude l'activity corrente
-						 startActivity(intent);	 //Si lancia la nuova activity,lanciando tramite intent la classe "PushTheButton2Activity.class" (activity iniziale)
+		    	 		try{			//gestione eccezioni connessione server
+		    	 				String s=getIntent().getExtras().getString("score");				   //Si memorizza nella stringa "s" il punteggio della partita, trasporato in questa activity dall'intent
+		    	 				DatiScambiati data= new DatiScambiati(0,text,s); //Si crea un oggetto "DatiScambiati",al quale si passa un id (in questo caso 0), il nome e il punteggio della partita 
+		    	 				DatiScambiati[] d=new DatiScambiati[1];							   //Si crea un array di oggetti "DatiScambiati" con dimensione 1
+		    	 				d[0]=data;
+		    	 				ClientSocket socket = new ClientSocket("10.0.2.2");	//Tramite il "socket" si apre una connessione con una porta di default predefinita (4321) e verso l'indirizzo IP 10.0..2.2 (ip del server)
+		    	 				socket.sendMessage(d);			//Si invia l'array d
+		    	 				DatiScambiati[] r=socket.recvMessage();			//Si riceve ciò che viene inviato dal server sulla connessione aperta	 
+		    	 				Toast.makeText(getApplicationContext(), r[0].contenutoFile, Toast.LENGTH_LONG).show();
+		    	 				Intent intent = new Intent(LastActivity.this,PushTheButton2Activity.class);
+		    	 				finish();				 //Si chiude l'activity corrente
+		    	 				startActivity(intent);	 //Si lancia la nuova activity,lanciando tramite intent la classe "PushTheButton2Activity.class" (activity iniziale)
+		    	 		}
+		    	 		catch(Exception e)
+		    	 		{
+		    	 			Toast.makeText(getApplicationContext(),"registration denied", Toast.LENGTH_LONG).show();
+		    	 			Intent intent = new Intent(LastActivity.this,PushTheButton2Activity.class);
+		    	 			finish();
+		    	 			startActivity(intent);
+		    	 		}
 		    	 	
 		    	 	 }
 		    	     

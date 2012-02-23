@@ -11,7 +11,7 @@ import java.util.TimerTask;
 public class Game extends Activity {
 	
 		GameView game;			//Si crea una variabile di istanza di classe GameView
-		int time=100;
+		int time=10;
 		Timer timer2=new Timer();				//Si crea un nuovo timer
 		TimerTask sendStart2= new TimerTask() 
 		{
